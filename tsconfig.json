@@ -1,19 +1,49 @@
-
 {
-"compilerOptions": {
-    "target": "es2016",                        
-    "module": "commonjs",                      
-    "rootDir": "./",                        
-    "outDir": "./dist",                        
-    "esModuleInterop": true,                  
-    "forceConsistentCasingInFileNames": true, 
-    "strict": true,                            
-    "skipLibCheck": true,                      
-    "resolveJsonModule": true,                 
-    "declaration": true  ,
-    "typeRoots": ["./node_modules/@types", "./src/types"]                       
-},
-"include": ["src/**/*.ts"],                   
-"exclude": ["node_modules"]                 
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "rootDir": "./",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "baseUrl": "./src/",
+    "paths": {
+      "@core": ["core/index.js"],
+      "@core/*": ["core/*"],
+
+      "@middlewares": ["middlewares/index.js"],
+      "@middlewares/*": ["middlewares/*"],
+
+      "@db": ["db/index.js"],
+      "@db/*": ["db/*"],
+
+      "@controllers": ["controllers/index.js"],
+      "@controllers/*": ["controllers/*"],
+
+      "@routes": ["routes/index.js"],
+      "@routes/*": ["routes/*"],
+
+      "@errors": ["errors/index.js"],
+      "@errors/*": ["errors/*"],
+
+      "@utils": ["utils/index.js"],
+      "@utils/*": ["utils/*"],
+
+      "@interfaces": ["interfaces/index.js"],
+      "@interfaces/*": ["interfaces/*"],
+
+      "@validations": ["validations/index.js"],
+      "@validations/*": ["validations/*"],
+
+      "@services": ["services/index.js"],
+      "@services/*": ["services/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
 }
-    
