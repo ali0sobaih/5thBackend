@@ -1,5 +1,4 @@
-import dotenv from "dotenv";
-dotenv.config();
+import {} from "./init.js"; //? To start every needed initialization
 
 import userRoutes from "./routes/authRoutes";
 import express from "express";

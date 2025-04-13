@@ -12,7 +12,7 @@ export const initEnv = () => {
   dotenv.config();
 
   //? Convert env string values to their JS corresponding values
-  const { env } = process;
+  const env = process.env as Record<any, any>;
   for (const variable in env) {
     if (Object.prototype.hasOwnProperty.call(env, variable)) {
       const value = env[variable];
