@@ -1,11 +1,11 @@
-import { mysqlTable, int, varchar, boolean } from 'drizzle-orm/mysql-core';
+import { mysqlTable, int, varchar, boolean } from "drizzle-orm/mysql-core";
 
-export const usersTable = mysqlTable('users', {
-  id: int('id').primaryKey().autoincrement(),
-  first_name: varchar('first_name', { length: 255 }).notNull(),
-  last_name: varchar('last_name', { length: 255 }).notNull(),
-  password: varchar('password', { length: 255 }).notNull(),
-  email: varchar('email', { length: 255 }).notNull().unique(),
-  user_name: varchar('user_name', { length: 255 }).notNull(),
-  phone: varchar('phone', { length: 255 }).notNull(),
-}); 
+export const usersTable = mysqlTable("users", {
+  id: int("id").primaryKey().autoincrement(),
+  first_name: varchar("first_name", { length: 255 }).notNull(),
+  last_name: varchar("last_name", { length: 255 }).notNull(),
+  password: varchar("password", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  user_name: varchar("user_name", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 255 }).notNull(),
+});

@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';            
 import { Request, Response } from 'express';  
-import { db } from "../db/connection";
+import { db } from "@db/connection";
 import { rolesUsersTable } from "../db/schemas/users_roles";
 import { rolesTable } from "../db/schemas/roles";
-import { success, error as errorResponse } from "../utils/response";
+import { success, error as errorResponse } from "@utils/response";
 import { eq } from "drizzle-orm";  
 import { assignRole } from '../validations/autherization.validation';
 import { number } from 'zod';

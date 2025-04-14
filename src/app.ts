@@ -1,17 +1,16 @@
-import dotenv from "dotenv";
-dotenv.config();
+import {} from "./init.js"; //? To start every needed initialization
+import userRoutes from "./routes/authRoutes";
+import express from "express";
+import authorizationRoutes from './routes/authorizationRouts.js'
 
-import userRoutes from './routes/authRoutes';
-import authorizationRoutes from './routes/authorizationRouts';
-import express, { Application } from "express";
-
-const app : Application = express();
+const app = express();
 
 app.use(express.json());
 app.use("/user", userRoutes);
-app.use("/authorization", authorizationRoutes);
 
-const PORT: number = parseInt(process.env.PORT || "3000");
+app.use("/authorization", authorizationRoutes);
+const PORT: number = process.env.SERVER_PORT || 3000;
+
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
