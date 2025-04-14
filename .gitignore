@@ -6,3 +6,4 @@ package-lock.json
 
 dist
 migrations
+drizzle.config.ts
