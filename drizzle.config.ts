@@ -1,15 +1,17 @@
 import { defineConfig } from "drizzle-kit";
+import * as dotenv from "dotenv";
+dotenv.config(); 
+
 
 export default defineConfig({
   schema: "./src/db/schemas/index.ts",
   out: "./migrations",
   dialect: "mysql",
   dbCredentials: {
-    host: "localhost" as string,
-    user: "root" as string,
-    password: "crossroads" as string,
-    database: "smartsyriahorizon" as string,
-    port: 3306,
-    ssl: undefined,
+    host: process.env.DB_HOST as string,
+    user: process.env.DB_USER as string,
+    password: process.env.DB_PASSWORD as string,
+    database: process.env.DB_NAME as string,
+    port: parseInt(process.env.DB_PORT || "3306"),
   },
 });

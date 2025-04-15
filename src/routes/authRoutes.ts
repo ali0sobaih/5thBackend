@@ -1,6 +1,6 @@
 import express from "express";
-import { validate } from "@middlewares/validate";
 import authController from "@controllers/authController";
+import { validate } from "@middlewares/validate";
 import {
   loginUserSchema,
   registerUserSchema,

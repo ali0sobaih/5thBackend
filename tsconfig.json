@@ -11,39 +11,37 @@
     "resolveJsonModule": true,
     "declaration": true,
     "typeRoots": ["./node_modules/@types", "./src/types"],
-    "baseUrl": "./src/",
+    "baseUrl": "./src",
     "paths": {
-      "@core": ["core/index.js"],
+      "@core": ["core/index"],
       "@core/*": ["core/*"],
 
-      "@middlewares": ["middlewares/index.js"],
+      "@middlewares": ["middlewares/index"],
       "@middlewares/*": ["middlewares/*"],
 
-      "@db": ["db/index.js"],
+      "@db": ["db/index"],
       "@db/*": ["db/*"],
 
-      "@controllers": ["controllers/index.js"],
+      "@controllers": ["controllers/index"],
       "@controllers/*": ["controllers/*"],
 
-      "@routes": ["routes/index.js"],
+      "@routes": ["routes/index"],
       "@routes/*": ["routes/*"],
 
-      "@errors": ["errors/index.js"],
+      "@errors": ["errors/index"],
       "@errors/*": ["errors/*"],
 
-      "@utils": ["utils/index.js"],
+      "@utils": ["utils/index"],
       "@utils/*": ["utils/*"],
 
-      "@interfaces": ["interfaces/index.js"],
+      "@interfaces": ["interfaces/index"],
       "@interfaces/*": ["interfaces/*"],
 
-      "@validations": ["validations/index.js"],
+      "@validations": ["validations/index"],
       "@validations/*": ["validations/*"],
 
-      "@services": ["services/index.js"],
+      "@services": ["services/index"],
       "@services/*": ["services/*"]
     }
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  }
 }
