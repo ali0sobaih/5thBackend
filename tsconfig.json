@@ -29,6 +29,7 @@
       "@routes/*": ["routes/*"],
 
       "@errors": ["errors/index"],
+      "@errors/api": ["errors/api/index"],
       "@errors/*": ["errors/*"],
 
       "@utils": ["utils/index"],

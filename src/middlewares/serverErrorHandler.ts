@@ -1,18 +1,23 @@
 import { Request, Response, NextFunction } from "express";
 import { ServerError } from "@errors/serverErrors";
 import { error } from "@utils/response";
+import { CustomApiError } from "@errors/api";
 
-export const serverErrorHandler = (
+export const errorHandler = (
   err: any,
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
-    if (err instanceof ServerError) {
-      return error(res, err.message, err.data, 500);
-    }
+  if (err instanceof CustomApiError) {
+    // TODO: add data
+    return error(res, err.message, null, err.statusCode);
+  }
 
-    console.error("Unhandled error:", err);
-    return error(res, "Internal server error", null, 500);
+  if (err instanceof ServerError) {
+    return error(res, err.message, err.data);
+  }
+
+  console.error("Unhandled error:", err);
+  return error(res, "Internal server error", null);
 };
-

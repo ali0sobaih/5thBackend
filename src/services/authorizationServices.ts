@@ -19,7 +19,7 @@ export const assignUserRole = async (userId: number, roleName: string) => {
         eq(rolesUsersTable.role_id, roleRecord.id)
       )
     );
-  if (given.length > 0 ) {
+  if (given.length > 0) {
     throw new Error("role already given to this user");
   }
 
