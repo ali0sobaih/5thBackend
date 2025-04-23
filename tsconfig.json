@@ -42,7 +42,7 @@
       "@validations/*": ["validations/*"],
 
       "@services": ["services/index"],
-      "@services/*": ["services/*"]
+      "@services/*": ["services/*"],
     }
   }
 }

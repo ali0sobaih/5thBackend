@@ -1,4 +1,4 @@
-import CustomApiError from "./CustomApiError.js";
+import CustomApiError from "./CustomApiError";
 
 export default class ConflictError extends CustomApiError {
   constructor(msg = "Couldn't create or update") {

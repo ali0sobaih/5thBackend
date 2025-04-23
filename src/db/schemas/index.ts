@@ -4,3 +4,7 @@ export { permissionsTable } from "./permissions";
 export { rolesPermissionsTable } from "./roles_permissions";
 export { usersPermissionsTable } from "./users_permissions";
 export { rolesUsersTable } from "./users_roles";
+export { attachmentsTable } from "./attachments";
+export { messagesTable } from "./messages";
+export { textMessagesTable } from "./textMessages";
+export { chatsTable } from "./chats";

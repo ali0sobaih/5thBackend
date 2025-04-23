@@ -1,4 +1,4 @@
-import CustomApiError from "./CustomApiError.js";
+import CustomApiError from "./CustomApiError";
 
 export default class NotFoundError extends CustomApiError {
   constructor(msg = "Item was not found") {

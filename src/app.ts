@@ -2,19 +2,23 @@ import {} from "./init.js"; //? To start every needed initialization
 
 import express from "express";
 import cors from "cors";
-
+import "./server";
 import userRoutes from "@routes/authRoutes";
 import authorizationRoutes from "@routes/authorizationRouts";
-import { errorHandler } from "@middlewares/serverErrorHandler.js";
+import chatRoutes from "@routes/chatRoutes"
+import { errorHandler } from "@middlewares/serverErrorHandler";
+import { messagesTable } from "@db/schemas/messages"
+import { eq, sql, and } from "drizzle-orm";
+import { db } from "@db/connection";
 
-const app = express();
-
+export const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(errorHandler);
 
 app.use("/user", userRoutes);
 app.use("/authorization", authorizationRoutes);
+app.use("/chats", chatRoutes);
 
 const PORT: number = parseInt(process.env.SERVER_PORT || "3000", 10);
 
