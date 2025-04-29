@@ -11,7 +11,7 @@ const register = controllerWrapper(
     return success(res, result.message, result.data, result.code);
   }
 );
-
+  
 const login = controllerWrapper(async (req: Request, res: Response) => {
   const userData = (req as any).validated;
   const result = await loginUser(userData);

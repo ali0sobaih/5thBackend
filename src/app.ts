@@ -7,9 +7,7 @@ import userRoutes from "@routes/authRoutes";
 import authorizationRoutes from "@routes/authorizationRouts";
 import chatRoutes from "@routes/chatRoutes"
 import { errorHandler } from "@middlewares/serverErrorHandler";
-import { messagesTable } from "@db/schemas/messages"
-import { eq, sql, and } from "drizzle-orm";
-import { db } from "@db/connection";
+
 
 export const app = express();
 app.use(express.json());
