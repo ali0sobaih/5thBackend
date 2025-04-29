@@ -1,1 +1,1 @@
-export * from "./repeat.js";
+export * from "./repeat";

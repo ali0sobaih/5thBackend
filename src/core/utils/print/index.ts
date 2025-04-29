@@ -1,1 +1,1 @@
-export * from "./print.js";
+export * from "./print";

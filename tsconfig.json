@@ -1,4 +1,8 @@
 {
+  "ts-node": {
+    "files": true
+  },
+  "files": ["./src/environment.d.ts", "./src/server.ts"],
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
@@ -42,7 +46,7 @@
       "@validations/*": ["validations/*"],
 
       "@services": ["services/index"],
-      "@services/*": ["services/*"],
+      "@services/*": ["services/*"]
     }
   }
 }

@@ -1,13 +1,12 @@
-import {} from "./init.js"; //? To start every needed initialization
+import {} from "./init"; //? To start every needed initialization
 
 import express from "express";
 import cors from "cors";
 import "./server";
 import userRoutes from "@routes/authRoutes";
 import authorizationRoutes from "@routes/authorizationRouts";
-import chatRoutes from "@routes/chatRoutes"
+import chatRoutes from "@routes/chatRoutes";
 import { errorHandler } from "@middlewares/serverErrorHandler";
-
 
 export const app = express();
 app.use(express.json());

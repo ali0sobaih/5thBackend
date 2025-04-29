@@ -1,3 +1,3 @@
-export * from "./MergedType.js";
-export * from "./OneOf.js";
-export * from "./nullables.js";
+export * from "./MergedType";
+export * from "./OneOf";
+export * from "./nullables";

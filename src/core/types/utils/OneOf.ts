@@ -1,4 +1,4 @@
-import { MergedType } from "./MergedType.js";
+import { MergedType } from "./MergedType";
 
 type OnlyFirst<T, S> = T & { [Key in keyof Omit<S, keyof S>]: never };
 
