@@ -13,18 +13,25 @@ const httpServer = createServer(app);
 const PORT = 3001;
 
 const io = new Server(httpServer, {
-  
   cors: { origin: "*" },
 });
-
 
 setIO(io);
 io.on("connection", (socket) => {
   console.log(`New connection: ${socket.id}`);
 
-  socket.on("register", (userId: number) => {
+  socket.on("user-online", (userId: number) => {
     registerUserSocket(userId, socket.id);
     console.log(`User ${userId} registered with socket ${socket.id}`);
+  });
+
+  socket.on("send-msg", (msg) => {
+    console.log("in send-msg");
+    socket.emit("sending-message", msg);
+  });
+
+  socket.on("sending-message", (msg) => {
+    console.log("sending", msg);
   });
 
   socket.on("messageReceived", async ({ msg_id }) => {
@@ -50,8 +57,6 @@ io.on("connection", (socket) => {
     console.log(`Socket disconnected: ${socket.id}`);
   });
 });
-
-
 
 httpServer.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { text } from "drizzle-orm/mysql-core";
 
 export const sendMessageSchema = z
   .object({
