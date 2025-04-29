@@ -12,8 +12,8 @@ const router = express.Router();
 
 router.post(
   "/sendMessage",
-  validate(sendMessageSchema),
   authMiddleware,
+  validate(sendMessageSchema),
   chatController.sendMessage
 );
 

@@ -1,4 +1,7 @@
 // server.ts
+import { initEnv } from "@core";
+initEnv();
+
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { app } from "./app";
@@ -10,7 +13,7 @@ import {
 } from "@services/chatServices";
 
 const httpServer = createServer(app);
-const PORT = 3001;
+const PORT = process.env.SERVER_PORT;
 
 const io = new Server(httpServer, {
   cors: { origin: "*" },
@@ -59,5 +62,5 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server Socket running on port ${PORT}`);
 });

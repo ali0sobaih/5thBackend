@@ -13,12 +13,15 @@ app.use(express.json());
 app.use(cors());
 app.use(errorHandler);
 
-app.use("/user", userRoutes);
-app.use("/authorization", authorizationRoutes);
-app.use("/chats", chatRoutes);
+const VERSION = process.env.API_VERSION;
 
-const PORT: number = parseInt(process.env.SERVER_PORT || "3000", 10);
+app.use(`/${VERSION}/user`, userRoutes);
+app.use(`/${VERSION}/authorization`, authorizationRoutes);
+app.use(`/${VERSION}/chats`, chatRoutes);
+
+const HOST = process.env.SERVER_HOST;
+const PORT = process.env.SERVER_PORT;
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://${HOST}:${PORT}/${VERSION}`);
 });
