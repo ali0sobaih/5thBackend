@@ -15,7 +15,7 @@ app.use(errorHandler);
 
 const VERSION = process.env.API_VERSION;
 
-app.use(`/${VERSION}/user`, userRoutes);
+app.use(`/user`, userRoutes);
 app.use(`/${VERSION}/authorization`, authorizationRoutes);
 app.use(`/${VERSION}/chats`, chatRoutes);
 

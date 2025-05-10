@@ -1,4 +1,5 @@
 import { mysqlTable, int, varchar, boolean } from "drizzle-orm/mysql-core";
+import { timestamps } from "./timestamps.helpers";
 
 export const usersTable = mysqlTable("users", {
   id: int("id").primaryKey().autoincrement(),
@@ -8,4 +9,5 @@ export const usersTable = mysqlTable("users", {
   email: varchar("email", { length: 255 }).notNull().unique(),
   user_name: varchar("user_name", { length: 100 }).notNull(),
   phone: varchar("phone", { length: 20 }).notNull(),
+  ...timestamps,
 });

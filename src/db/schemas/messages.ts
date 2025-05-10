@@ -2,6 +2,7 @@ import { mysqlTable, int, timestamp, boolean } from "drizzle-orm/mysql-core";
 import { attachmentsTable } from "./attachments";
 import { chatsTable } from "./chats";
 import { textMessagesTable } from "./textMessages";
+import { timestamps } from "./timestamps.helpers";
 
 export const messagesTable = mysqlTable("messages", {
   id: int("id").primaryKey().autoincrement(),
@@ -15,7 +16,5 @@ export const messagesTable = mysqlTable("messages", {
 
   seen: boolean("seen").notNull().default(false),
   received: boolean("received").notNull().default(false),
-
-  created_at: timestamp("created_at").notNull().defaultNow(),
-  updated_at: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
+  ...timestamps,
 });

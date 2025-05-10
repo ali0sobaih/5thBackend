@@ -1,3 +1,3 @@
-import { initEnv } from "@core/index";
+import { initEnv } from "@core";
 
 initEnv();

@@ -1,4 +1,4 @@
-import { z } from "zod";
+  import { z } from "zod";
 
 const passwordSchema = z
   .string({ required_error: "Password is required" })
@@ -36,7 +36,7 @@ export const registerUserSchema = z
     last_name: z.string({ required_error: "Last name is required" }).min(1),
     email: z.string({ required_error: "Email is required" }).email(),
     phone: phoneSchema,
-    password: passwordSchema,
+    password: passwordSchema,   
     confirmPassword: z.string({
       required_error: "Please confirm your password",
     }),

@@ -1,5 +1,6 @@
 import { mysqlTable, int, varchar, boolean } from "drizzle-orm/mysql-core";
 import { usersTable } from "./users";
+import { timestamps } from "./timestamps.helpers";
 
 
 export const chatsTable = mysqlTable("chats", {
@@ -10,4 +11,5 @@ export const chatsTable = mysqlTable("chats", {
   users2_id: int("users2_id")
     .notNull()
     .references(() => usersTable.id),
+    ...timestamps
 });
