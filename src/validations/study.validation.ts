@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { locationSchema } from "./location.validation";
 
 export const addStudySchema = z.object({
   title: z
@@ -13,12 +14,14 @@ export const addStudySchema = z.object({
     .number({ required_error: "Author ID is required" })
     .int("Author ID must be an integer"),
 
-  status: z.enum(["ai_suggested", "approved", "byEmployees"], {
+  status: z.enum(["ai_pending", "ai_approved", "ai_rejected", "byEmployees"], {
     required_error: "Status is required",
     invalid_type_error: "Invalid status value",
   }),
 
-  location_id: z
-    .number({ required_error: "Location ID is required" })
-    .int("Location ID must be an integer"),
+  location_id: z.number().int().optional(),
+  location: locationSchema.optional(),
 });
+
+
+export type addStudy = z.infer<typeof addStudySchema>;

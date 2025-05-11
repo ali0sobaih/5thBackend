@@ -18,6 +18,9 @@ const VERSION = process.env.API_VERSION;
 app.use(`/user`, userRoutes);
 app.use(`/${VERSION}/authorization`, authorizationRoutes);
 app.use(`/${VERSION}/chats`, chatRoutes);
+app.get(`/${VERSION}/test`, (req, res)=>{
+  res.sendStatus(200);
+})
 
 const HOST = process.env.SERVER_HOST;
 const PORT = process.env.SERVER_PORT;
