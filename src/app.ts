@@ -1,26 +1,32 @@
-import {} from "./init"; //? To start every needed initialization
+import "./init"; //? To start every needed initialization
 
 import express from "express";
 import cors from "cors";
-import "./server";
+// import "./server";
+
+// TODO: use index file to import all routers
+import serverStatsRouter from "@routes/server-stats";
 import userRoutes from "@routes/authRoutes";
 import authorizationRoutes from "@routes/authorizationRouts";
-import chatRoutes from "@routes/chatRoutes";
+// import chatRoutes from "@routes/chatRoutes";
+
+// TODO: use index file to import middlewares
 import { errorHandler } from "@middlewares/serverErrorHandler";
 
 export const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(errorHandler);
+// app.use(errorHandler);
 
 const VERSION = process.env.API_VERSION;
 
-app.use(`/user`, userRoutes);
+// app.get("")
+
+app.use(`/${VERSION}/test`, serverStatsRouter);
+
+app.use(`/${VERSION}/user`, userRoutes);
 app.use(`/${VERSION}/authorization`, authorizationRoutes);
-app.use(`/${VERSION}/chats`, chatRoutes);
-app.get(`/${VERSION}/test`, (req, res)=>{
-  res.sendStatus(200);
-})
+// app.use(`/${VERSION}/chats`, chatRoutes);
 
 const HOST = process.env.SERVER_HOST;
 const PORT = process.env.SERVER_PORT;

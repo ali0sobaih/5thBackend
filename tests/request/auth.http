@@ -1,0 +1,12 @@
+POST http://localhost:3000/v1/user/register
+
+Content-Type: application/json
+Accept: */*
+
+{
+    "first_name" : "ali",
+    "last_name" : "ali",
+    "email" : "ali1@gmail.com",
+    "phone" : "+9090909",
+    "password" : "pass1!@dSds"
+}
