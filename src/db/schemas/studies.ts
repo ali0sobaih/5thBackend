@@ -2,6 +2,7 @@ import {
   mysqlTable,
   int,
   longtext,
+  boolean,
   varchar,
   mysqlEnum
 } from "drizzle-orm/mysql-core";
@@ -21,6 +22,7 @@ export const studiesTable = mysqlTable("studies", {
     "byEmployees",
   ]).notNull(),
   location_id: int("location_id").references(() => locationsTable.id),
+  draft: boolean("draft").notNull(),
   ...timestamps,
 });
 
