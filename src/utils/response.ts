@@ -19,6 +19,8 @@ export const error = (
   data: unknown = null,
   statusCode: number = 500
 ) => {
+  console.log("error:", data);
+
   res.status(statusCode).json({
     status: statusCode,
     message,

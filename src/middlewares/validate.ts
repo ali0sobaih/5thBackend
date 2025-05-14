@@ -7,6 +7,7 @@ export const validate = (schema: ZodSchema): RequestHandler => {
       (req as any).validated = schema.parse(req.body);
       next();
     } catch (err: any) {
+      // TODO: make use of throw CustomAPIErrors. (wrap function with controllerWrapper)
       res.status(400).json({
         status: 400,
         message: "Validation failed",

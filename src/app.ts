@@ -16,7 +16,6 @@ import { errorHandler } from "@middlewares/serverErrorHandler";
 export const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(errorHandler);
 
 const VERSION = process.env.API_VERSION;
 
@@ -25,6 +24,8 @@ app.use(`/${VERSION}/test`, serverStatsRouter);
 app.use(`/${VERSION}/user`, userRoutes);
 app.use(`/${VERSION}/authorization`, authorizationRoutes);
 // app.use(`/${VERSION}/chats`, chatRoutes);
+
+app.use(errorHandler);
 
 const HOST = process.env.SERVER_HOST;
 const PORT = process.env.SERVER_PORT;

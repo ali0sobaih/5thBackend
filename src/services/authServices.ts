@@ -18,6 +18,15 @@ export const registerUser = async (userData: UserRegister) => {
     throw new ConflictError("The email already exists!");
   }
 
+  const existingUsername = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.username, username));
+
+  if (existingUsername.length > 0) {
+    throw new ConflictError("The username already exists!");
+  }
+
   const hashed = await bcrypt.hash(password, 10);
 
   const result = await db.insert(usersTable).values({

@@ -3,11 +3,10 @@ Content-Type: application/json
 Accept: */*
 
 {
-    "username" : "ali",
-    "first_name" : "ali",
-    "last_name" : "ali",
-    "email" : "ali1@gmail.com",
-    "phone" : "0909090958",
-    "password" : "pass1!@dSds",
-    "confirmPassword" : "pass1!@dSds"
+    "username": "ali",
+    "first_name": "ali",
+    "last_name": "ali",
+    "email": "ali1@gmail.com",
+    "phone": "0909090958",
+    "password": "pass1!@dSds"
 }
