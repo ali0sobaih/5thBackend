@@ -4,7 +4,7 @@ import { initEnv } from "@core";
 initEnv();
 
 export default defineConfig({
-  schema: "./src/db/schemas/index.ts",
+  schema: "./src/db/schemas",
   out: "./migrations",
   dialect: "mysql",
   dbCredentials: {
