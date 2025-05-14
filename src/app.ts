@@ -16,11 +16,9 @@ import { errorHandler } from "@middlewares/serverErrorHandler";
 export const app = express();
 app.use(express.json());
 app.use(cors());
-// app.use(errorHandler);
+app.use(errorHandler);
 
 const VERSION = process.env.API_VERSION;
-
-// app.get("")
 
 app.use(`/${VERSION}/test`, serverStatsRouter);
 

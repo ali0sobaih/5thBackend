@@ -9,8 +9,8 @@
     "client": "ts-node-dev -r tsconfig-paths/register --respawn src/client.ts",
     "build": "tsc",
     "generate": "npx drizzle-kit generate",
-    "push": "npx drizzle-kit push",
     "migrate": "npx drizzle-kit migrate",
+    "push": "npx drizzle-kit push",
     "studio": "npx drizzle-kit studio"
   },
   "keywords": [],

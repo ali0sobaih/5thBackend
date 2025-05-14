@@ -1,4 +1,4 @@
-  import { z } from "zod";
+import { z } from "zod";
 
 const passwordSchema = z
   .string({ required_error: "Password is required" })
@@ -30,13 +30,19 @@ const phoneSchema = z
     }
   );
 
+const usernameSchema = z
+  .string({ required_error: "username is required" })
+  .min(1)
+  .refine((val) => !/[/s]/.test(val));
+
 export const registerUserSchema = z
   .object({
+    username: usernameSchema,
     first_name: z.string({ required_error: "First name is required" }).min(1),
     last_name: z.string({ required_error: "Last name is required" }).min(1),
     email: z.string({ required_error: "Email is required" }).email(),
     phone: phoneSchema,
-    password: passwordSchema,   
+    password: passwordSchema,
     confirmPassword: z.string({
       required_error: "Please confirm your password",
     }),
@@ -46,8 +52,20 @@ export const registerUserSchema = z
     message: "Passwords do not match",
   });
 
+const authenticatorSchema = z
+  .object({
+    email: z.string().email().optional(),
+    username: usernameSchema.optional(),
+  })
+  .refine(({ email, username }) => !email && !username, {
+    message: "Email or Username is empty",
+  })
+  .refine(({ email, username }) => email && username, {
+    message: "You must specify only one (Email or Username)",
+  });
+
 export const loginUserSchema = z.object({
-  email: z.string({ required_error: "Email is required" }).email(),
+  authenticator: authenticatorSchema,
   password: z.string({ required_error: "Password is required" }),
 });
 
