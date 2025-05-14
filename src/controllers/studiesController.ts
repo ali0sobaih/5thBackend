@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { success } from "../utils/response";
 import { JwtPayload } from "../interfaces/jwt";
 import { controllerWrapper } from "./wrapper";
-import { addStudyService, showAIPendingService } from "../services/studiesService";
+import { addStudyService, saveStudyService, showAIPendingService } from "../services/studiesService";
 
 
 interface AuthenticatedRequest extends Request {
@@ -18,6 +18,17 @@ const addStudy = controllerWrapper(
         return success(res, result.message, result.data, result.code);
     }   
 );
+
+/*
+const saveStudy = controllerWrapper(
+  async (req: AuthenticatedRequest, res: Response) => {
+    const authUserId = req.user?.id;
+    const addStudyData = (req as any).validated;
+    addStudyData.author_id = authUserId;
+    const result = await saveStudyService();
+    return success();
+  }
+);*/
 
 const showAIPending = controllerWrapper(
   async (req: Request, res: Response) => {

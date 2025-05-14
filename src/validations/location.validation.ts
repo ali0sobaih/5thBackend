@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const locationSchema = z
   .object({
-    name: z.string().nullable().optional(),
+    name: z.string(),
     center_lat: z.number().nullable().optional(),
     center_long: z.number().nullable().optional(),
     area: z
