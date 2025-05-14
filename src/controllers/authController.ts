@@ -4,14 +4,12 @@ import { JwtPayload } from "@interfaces/jwt";
 import { registerUser, loginUser, logoutUser } from "@services/authServices";
 import { controllerWrapper } from "./wrapper";
 
-const register = controllerWrapper(
-  async (req: Request, res: Response) => {
-    const userData = (req as any).validated;
-    const result = await registerUser(userData);
-    return success(res, result.message, result.data, result.code);
-  }
-);
-  
+const register = controllerWrapper(async (req: Request, res: Response) => {
+  const userData = (req as any).validated;
+  const result = await registerUser(userData);
+  return success(res, result.message, result.data, result.code);
+});
+
 const login = controllerWrapper(async (req: Request, res: Response) => {
   const userData = (req as any).validated;
   const result = await loginUser(userData);
@@ -30,8 +28,8 @@ const logout = controllerWrapper(
   }
 );
 
-export default{
+export default {
   register,
   login,
-  logout
-}
+  logout,
+};
