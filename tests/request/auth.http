@@ -1,12 +1,44 @@
-POST http://localhost:3000/v1/user/register
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@route = {{basePath}}/user
+
+###
+# @name RegisterNewUser
+POST {{route}}/register
 Content-Type: application/json
 Accept: */*
 
 {
-    "username": "ali2",
+    "username": "ali3",
     "first_name": "ali",
     "last_name": "ali",
-    "email": "ali2@gmail.com",
+    "email": "ali3@gmail.com",
     "phone": "0909090958",
+    "password": "pass1!@dSds"
+}
+
+###
+# @name LoginWithUsername
+POST {{route}}/login
+Content-Type: application/json
+Accept: */*
+
+{
+    "authenticator": {
+        "username": "ali2"
+    },
+    "password": "pass1!@dSds"
+}
+
+###
+# @name LoginWithEmail
+POST {{route}}/login
+Content-Type: application/json
+Accept: */*
+
+{
+    "authenticator": {
+        "email": "ali2@gmail.com"
+    },
     "password": "pass1!@dSds"
 }

@@ -1,4 +1,9 @@
-GET http://localhost:3000/v1/test/server-up
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@route = {{basePath}}/test
 
+###
+# @name IsServerUp
+GET {{route}}/server-up
 Content-Type: application/json
 Accept: */*
