@@ -102,6 +102,9 @@ export const loginUser = async (credentials: UserLogin) => {
   };
 };
 
+// TODO: this controller and its route should be changed to deleteAccount instead. (see details below)
+// ! When user want to logout he might want to log in again,
+// ! let the frontend devs handle the logout functionality.
 //logout
 export const logoutUser = async (userId: number) => {
   if (!userId) {
