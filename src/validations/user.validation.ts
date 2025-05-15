@@ -45,16 +45,19 @@ export const registerUserSchema = z.object({
 });
 
 const authenticatorSchema = z
-  .object({
-    email: z.string().email().optional(),
-    username: usernameSchema.optional(),
-  })
-  .refine(({ email, username }) => !email && !username, {
-    message: "Email or Username is empty",
-  })
-  .refine(({ email, username }) => email && username, {
-    message: "You must specify only one (Email or Username)",
-  });
+  .object(
+    {
+      email: z.string().email().optional(),
+      username: usernameSchema.optional(),
+    },
+    { required_error: "You must specify one of (Email or Username)" }
+  )
+  .refine(
+    ({ email, username }) => (email || username) && !(email && username),
+    {
+      message: "You must specify one of (Email or Username)",
+    }
+  );
 
 export const loginUserSchema = z.object({
   authenticator: authenticatorSchema,

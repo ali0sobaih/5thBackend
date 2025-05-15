@@ -1,6 +1,6 @@
 import "./init"; //? To start every needed initialization
 
-import express from "express";
+import express, { json } from "express";
 import cors from "cors";
 // import "./server";
 
@@ -14,8 +14,9 @@ import authorizationRoutes from "@routes/authorizationRouts";
 import { errorHandler } from "@middlewares/serverErrorHandler";
 
 export const app = express();
-app.use(express.json());
+
 app.use(cors());
+app.use(json());
 
 const VERSION = process.env.API_VERSION;
 

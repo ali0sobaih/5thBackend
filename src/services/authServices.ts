@@ -50,7 +50,7 @@ export const registerUser = async (userData: UserRegister) => {
         id: newUser.id,
         firstName: newUser.first_name,
         lastName: newUser.last_name,
-        userName: newUser.username,
+        username: newUser.username,
         email: newUser.email,
         phone: newUser.phone,
       },
@@ -90,6 +90,10 @@ export const loginUser = async (credentials: UserLogin) => {
     message: "logged in successfully!",
     data: {
       user: {
+        /*
+        TODO FIX: Privacy Violation
+        ! The bellow code is sending the hashed PASSWORD to client via connection
+        */
         user,
       },
       token: generateToken({ id: user.id, email: user.email }, "1h"),
