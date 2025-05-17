@@ -8,11 +8,10 @@ interface AuthenticatedRequest extends Request {
   user?: JwtPayload;
 }
 
-// TODO: not final !!!!!!!!
 const addCategory = controllerWrapper(
   async (req: Request, res: Response) => {
-  const addGISData = (req as any).validated;
-  const result = await addCategoryService(addGISData);
+  const addCategoryData = (req as any).validated;
+  const result = await addCategoryService(addCategoryData);
   return success(res, result.message, result.data, result.code);
 });
 
