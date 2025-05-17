@@ -3,12 +3,12 @@ import fs from "node:fs";
 type Configurations = Record<string, any>;
 
 let serverConfigurations: Configurations | null = null;
-const configPath = "/server-config.json";
+const configPath = `${global.__ROOT_DIR__}/server-config.json`;
 
 export const getConfigurations = () => {
   if (!serverConfigurations) {
     try {
-      const data = fs.readFileSync(__dirname + configPath, {
+      const data = fs.readFileSync(configPath, {
         encoding: "utf-8",
       });
       serverConfigurations = JSON.parse(data);
@@ -18,7 +18,7 @@ export const getConfigurations = () => {
     }
   }
 
-  return serverConfigurations;
+  return serverConfigurations as Configurations;
 };
 
 export const setConfiguration = (configs: Configurations) => {
@@ -32,6 +32,19 @@ export const setConfiguration = (configs: Configurations) => {
   } catch (error) {
     console.error(error);
   }
+
+  serverConfigurations = null;
+};
+
+export const deleteConfiguration = (key: string | string[]) => {
+  const configs = getConfigurations();
+
+  const keys = Array.isArray(key) ? key : [key];
+  for (const key of keys) {
+    delete configs[key];
+  }
+
+  setConfiguration(configs);
 
   serverConfigurations = null;
 };

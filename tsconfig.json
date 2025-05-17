@@ -3,8 +3,8 @@
     "files": true
   },
   "files": [
-    "./global.d.ts",
-    "./environment.d.ts",
+    "./env/types/environment.d.ts",
+    "./env/types/global.d.ts",
     "./src/app.ts",
     "./drizzle.config.ts"
   ],
