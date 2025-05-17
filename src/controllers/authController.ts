@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import { success } from "@utils/response";
 import { JwtPayload } from "@interfaces/jwt";
-import { registerUser, loginUser, logoutUser } from "@services/authServices";
+import {
+  registerUser,
+  loginUser,
+  deleteAccountService,
+} from "@services/authServices";
 import { controllerWrapper } from "./wrapper";
 
 const register = controllerWrapper(async (req: Request, res: Response) => {
@@ -20,10 +24,10 @@ interface AuthenticatedRequest extends Request {
   user?: JwtPayload;
 }
 
-const logout = controllerWrapper(
+const deleteAccount = controllerWrapper(
   async (req: AuthenticatedRequest, res: Response) => {
     const userId = req.user?.id;
-    const result = await logoutUser(userId as number);
+    const result = await deleteAccountService(userId as number);
     return success(res, result.message, result.data, result.code);
   }
 );
@@ -31,5 +35,5 @@ const logout = controllerWrapper(
 export default {
   register,
   login,
-  logout,
+  deleteAccount,
 };

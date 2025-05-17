@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { generateToken } from "@utils/generateToken";
 import { UserRegister, UserLogin } from "@validations/user.validation";
 import { ConflictError, UnauthorizedError } from "@errors/api";
+import { userExists } from "@utils"
 
 export const registerUser = async (userData: UserRegister) => {
   const { username, first_name, last_name, email, phone, password } = userData;
@@ -86,34 +87,40 @@ export const loginUser = async (credentials: UserLogin) => {
     throw new UnauthorizedError("Invalid credentials - password mismatch");
   }
 
+  const userData = {
+    id: user.id,
+    username: user.username,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email,
+    phone: user.phone,
+    token: generateToken({ id: user.id, email: user.email }, "24h"),
+  }
+
   return {
     message: "logged in successfully!",
-    data: {
-      user: {
-        /*
-        TODO FIX: Privacy Violation
-        ! The bellow code is sending the hashed PASSWORD to client via connection
-        */
-        user,
-      },
-      token: generateToken({ id: user.id, email: user.email }, "1h"),
-    },
+    data: userData,
     code: 200,
   };
 };
 
-// TODO: this controller and its route should be changed to deleteAccount instead. (see details below)
-// ! When user want to logout he might want to log in again,
-// ! let the frontend devs handle the logout functionality.
 //logout
-export const logoutUser = async (userId: number) => {
+export const deleteAccountService = async (userId: number) => {
   if (!userId) {
     throw new UnauthorizedError("User not authenticated");
   }
 
+  if (!userExists(userId)) {
+    return {
+      message: "Account not found!",
+      data: null,
+      code: 404,
+    };
+  }
+
   await db.delete(usersTable).where(eq(usersTable.id, userId));
   return {
-    message: "logged out successfully!",
+    message: "Account deleted successfully! bye",
     data: null,
     code: 200,
   };

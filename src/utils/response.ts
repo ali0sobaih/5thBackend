@@ -6,7 +6,7 @@ export const success = (
   data: any = null,
   statusCode: number = 200
 ) => {
-  if (data.warning) {
+  if (data && data.warning) {
     const warningHeaders = new Headers({ warning: data.warning });
     res.setHeaders(warningHeaders);
   }

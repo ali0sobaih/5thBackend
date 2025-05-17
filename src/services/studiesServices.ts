@@ -154,7 +154,7 @@ export const saveStudyService = async (study_id: number) => {
       gis_entry_count: GISdata.length,
       warning,
     },
-    code: warning ? 400 : 200,
+    code: 200,
   };
 };
 

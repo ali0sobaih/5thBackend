@@ -12,24 +12,11 @@ Content-Type: application/json
 Accept: */*
 
 {
-    "username": "ali3",
+    "username": "ali9",
     "first_name": "ali",
     "last_name": "ali",
-    "email": "ali3@gmail.com",
+    "email": "ali9@gmail.com",
     "phone": "0909090958",
-    "password": "pass1!@dSds"
-}
-###
-
-# @name LoginWithUsername
-POST {{route}}/login
-Content-Type: application/json
-Accept: */*
-
-{
-    "authenticator": {
-        "username": "ali2"
-    },
     "password": "pass1!@dSds"
 }
 ###
@@ -45,4 +32,25 @@ Accept: */*
     },
     "password": "pass1!@dSds"
 }
+###
+
+# @name LoginWithUsername
+POST {{route}}/login
+Content-Type: application/json
+Accept: */*
+
+{
+    "authenticator": {
+        "username": "ali9"
+    },
+    "password": "pass1!@dSds"
+}
+###
+
+# @name deleteAccount
+POST {{route}}/delete-account
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{LoginWithUsername.response.body.token}}
+
 ###

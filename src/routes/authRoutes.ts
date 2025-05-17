@@ -11,6 +11,6 @@ const router = express.Router();
 
 router.post("/register", validate(registerUserSchema), authController.register);
 router.post("/login", validate(loginUserSchema), authController.login);
-router.post("/logout", authMiddleware, authController.logout);
+router.post("/delete-account", authMiddleware, authController.deleteAccount);
 
 export default router;
