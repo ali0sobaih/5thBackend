@@ -3,7 +3,7 @@
     "$shared": {
       "version": "v1"
     },
-    "dev": {
+    "development": {
       "protocol": "http",
       "host": "localhost",
       "port": "3000"
