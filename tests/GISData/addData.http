@@ -1,9 +1,33 @@
-POST http://localhost:3000/v1/GISData/addCategory
+// FILE VARIABLES
+
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@userRoute = {{basePath}}/user
+@route = {{basePath}}/GISData
+
+// REQUESTS
+
+# @name Login
+POST {{userRoute}}/login
 Content-Type: application/json
 Accept: */*
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhbGkxQGdtYWlsLmNvbSIsImlhdCI6MTc0NzQ2OTU1NCwiZXhwIjoxNzQ3NTU1OTU0fQ.u57COuwHOXuhwj4P-JQyUXfSY75VOqhpbMqwKincBjI
+
+{
+    "authenticator": {
+        "username": "ali"
+    },
+    "password": "pass1!@dSds"
+}
+###
+
+# @name AddDataCategory
+POST {{route}}/addCategory
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
 
 {
   "name": "abs",
   "description" : "ali is the GOAT"
 }
+###
