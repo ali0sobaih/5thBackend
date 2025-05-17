@@ -1,8 +1,11 @@
+// FILE VARIABLES
+
 @baseURL = {{protocol}}://{{host}}:{{port}}
 @basePath = {{baseURL}}/{{version}}
 @route = {{basePath}}/user
 
-###
+// REQUESTS
+
 # @name RegisterNewUser
 POST {{route}}/register
 Content-Type: application/json
@@ -16,8 +19,8 @@ Accept: */*
     "phone": "0909090958",
     "password": "pass1!@dSds"
 }
-
 ###
+
 # @name LoginWithUsername
 POST {{route}}/login
 Content-Type: application/json
@@ -29,8 +32,8 @@ Accept: */*
     },
     "password": "pass1!@dSds"
 }
-
 ###
+
 # @name LoginWithEmail
 POST {{route}}/login
 Content-Type: application/json
@@ -42,3 +45,4 @@ Accept: */*
     },
     "password": "pass1!@dSds"
 }
+###
