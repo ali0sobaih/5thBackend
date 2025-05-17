@@ -35,34 +35,29 @@ const usernameSchema = z
   .min(1)
   .refine((val) => !/[/s]/.test(val));
 
-export const registerUserSchema = z
-  .object({
-    username: usernameSchema,
-    first_name: z.string({ required_error: "First name is required" }).min(1),
-    last_name: z.string({ required_error: "Last name is required" }).min(1),
-    email: z.string({ required_error: "Email is required" }).email(),
-    phone: phoneSchema,
-    password: passwordSchema,
-    confirmPassword: z.string({
-      required_error: "Please confirm your password",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "Passwords do not match",
-  });
+export const registerUserSchema = z.object({
+  username: usernameSchema,
+  first_name: z.string({ required_error: "First name is required" }).min(1),
+  last_name: z.string({ required_error: "Last name is required" }).min(1),
+  email: z.string({ required_error: "Email is required" }).email(),
+  phone: phoneSchema,
+  password: passwordSchema,
+});
 
 const authenticatorSchema = z
-  .object({
-    email: z.string().email().optional(),
-    username: usernameSchema.optional(),
-  })
-  .refine(({ email, username }) => !email && !username, {
-    message: "Email or Username is empty",
-  })
-  .refine(({ email, username }) => email && username, {
-    message: "You must specify only one (Email or Username)",
-  });
+  .object(
+    {
+      email: z.string().email().optional(),
+      username: usernameSchema.optional(),
+    },
+    { required_error: "You must specify one of (Email or Username)" }
+  )
+  .refine(
+    ({ email, username }) => (email || username) && !(email && username),
+    {
+      message: "You must specify one of (Email or Username)",
+    }
+  );
 
 export const loginUserSchema = z.object({
   authenticator: authenticatorSchema,

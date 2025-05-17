@@ -1,6 +1,6 @@
 import "./init"; //? To start every needed initialization
 
-import express from "express";
+import express, { json } from "express";
 import cors from "cors";
 // import "./server";
 
@@ -23,9 +23,9 @@ import {
 import { errorHandler } from "@middlewares/serverErrorHandler";
 
 export const app = express();
-app.use(express.json());
+
 app.use(cors());
-app.use(errorHandler);
+app.use(json());
 
 const VERSION = process.env.API_VERSION;
 
@@ -38,6 +38,8 @@ app.use(`/${VERSION}/locations`, locationRouter);
 app.use(`/${VERSION}/GISData`, GISDataRouter);
 
 // app.use(`/${VERSION}/chats`, ChatRouter);
+
+app.use(errorHandler);
 
 const HOST = process.env.SERVER_HOST;
 const PORT = process.env.SERVER_PORT;

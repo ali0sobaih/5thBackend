@@ -18,6 +18,15 @@ export const registerUser = async (userData: UserRegister) => {
     throw new ConflictError("The email already exists!");
   }
 
+  const existingUsername = await db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.username, username));
+
+  if (existingUsername.length > 0) {
+    throw new ConflictError("The username already exists!");
+  }
+
   const hashed = await bcrypt.hash(password, 10);
 
   const result = await db.insert(usersTable).values({
@@ -41,7 +50,7 @@ export const registerUser = async (userData: UserRegister) => {
         id: newUser.id,
         firstName: newUser.first_name,
         lastName: newUser.last_name,
-        userName: newUser.username,
+        username: newUser.username,
         email: newUser.email,
         phone: newUser.phone,
       },
@@ -81,6 +90,10 @@ export const loginUser = async (credentials: UserLogin) => {
     message: "logged in successfully!",
     data: {
       user: {
+        /*
+        TODO FIX: Privacy Violation
+        ! The bellow code is sending the hashed PASSWORD to client via connection
+        */
         user,
       },
       token: generateToken({ id: user.id, email: user.email }, "1h"),
@@ -89,6 +102,9 @@ export const loginUser = async (credentials: UserLogin) => {
   };
 };
 
+// TODO: this controller and its route should be changed to deleteAccount instead. (see details below)
+// ! When user want to logout he might want to log in again,
+// ! let the frontend devs handle the logout functionality.
 //logout
 export const logoutUser = async (userId: number) => {
   if (!userId) {

@@ -11,9 +11,11 @@ export const success = (
     res.setHeaders(warningHeaders);
   }
   res.status(statusCode).json({
-    status: statusCode,
-    message,
-    data,
+    ...data,
+    metaData: {
+      status: statusCode,
+      message,
+    },
   });
 };
 
@@ -23,6 +25,8 @@ export const error = (
   data: unknown = null,
   statusCode: number = 500
 ) => {
+  console.log("error:", data);
+
   res.status(statusCode).json({
     status: statusCode,
     message,
