@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { locationSchema } from "./location.validation";
 
 const QuantitySchema = z
   .object({
@@ -25,7 +24,20 @@ export const GISDataSchema = z.object({
   locationId: z
     .number()
     .int({ message: "location is required for all GIS data added" }),
+  author_id: z.number().int().positive(),
 });
 
+export const GISDataArraySchema = z.array(GISDataSchema);
+
+export const addGISCategorySchema = z.object({
+  name: z
+    .string({ required_error: "category name is required" })
+    .min(1, "Study content must not be empty"),
+  description: z
+    .string({ required_error: "category description is required" })
+    .min(1, "Study content must not be empty"),
+});
+
+export type GISDataArray = z.infer<typeof GISDataArraySchema>;
 export type GISData = z.infer<typeof GISDataSchema>;
-  
+export type addGISCategory = z.infer<typeof addGISCategorySchema>;

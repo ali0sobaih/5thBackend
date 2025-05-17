@@ -1,6 +1,5 @@
 import { db } from '../connection';
 import { rolesTable } from '../schemas/roles';
-import { eq } from 'drizzle-orm';
 
 async function seedRoles() {
   const existing = await db.select().from(rolesTable);

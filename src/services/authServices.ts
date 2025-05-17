@@ -45,7 +45,7 @@ export const registerUser = async (userData: UserRegister) => {
         email: newUser.email,
         phone: newUser.phone,
       },
-      token: generateToken({ id: newUser.id, email: newUser.email }, "1h"),
+      token: generateToken({ id: newUser.id, email: newUser.email }, "24h"),
     },
     code: 200,
   };

@@ -12,7 +12,6 @@ export const locationSchema = z
   })
   .refine(
     (data) => {
-      // Constraint 1: area must exist OR both center_lat and center_long
       const hasCenter =
         data.center_lat !== null &&
         data.center_lat !== undefined &&
@@ -21,16 +20,16 @@ export const locationSchema = z
 
       const hasArea = Array.isArray(data.area) && data.area.length > 0;
 
-      return hasArea || hasCenter;
+      // ❗ Now enforcing that only one of them is provided
+      return (hasArea && !hasCenter) || (!hasArea && hasCenter);
     },
     {
       message:
-        "Either 'area' or both 'center_lat' and 'center_long' must be provided.",
+        "Provide either 'area' OR both 'center_lat' and 'center_long', not both.",
     }
   )
   .refine(
     (data) => {
-      // Constraint 2: lat and long must both be null/undefined or both present
       const latSet = data.center_lat !== null && data.center_lat !== undefined;
       const longSet =
         data.center_long !== null && data.center_long !== undefined;

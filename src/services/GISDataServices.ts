@@ -1,12 +1,15 @@
 // src/services/geoDataService.ts
 import { db } from "../db/connection";
-import { GISData } from "../validations/GISData.validation";
-import { quantitiesTable, GISdataTable } from "../db/schemas/index";
+import { GISData, addGISCategory } from "../validations/GISData.validation";
+import {
+  quantitiesTable,
+  GISdataTable,
+  GIScategoriesTable,
+} from "../db/schemas/index";
 
 export const addStudyGISData = async (
   geoData: GISData[],
-  studyId: number,  
-  authorId: number
+  studyId: number
 ) => {
   for (const geoItem of geoData) {
     let quantityId: number | null = null;
@@ -28,7 +31,18 @@ export const addStudyGISData = async (
       location_id: geoItem.locationId,
       study_id: studyId as number,
       quantity_id: quantityId,
-      author_id: authorId,
+      author_id: geoItem.author_id,
     });
   }
+};
+
+// TODO: this need rapier ,it is not final!
+export const addCategoryService = async (data: addGISCategory) => {
+  await db.insert(GIScategoriesTable).values(data);
+
+  return {
+    message: "added!",
+    data: null,
+    code: 200,
+  };
 };

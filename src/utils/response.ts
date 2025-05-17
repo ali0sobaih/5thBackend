@@ -3,9 +3,13 @@ import { Response } from "express";
 export const success = (
   res: Response,
   message: string,
-  data: unknown = null,
+  data: any = null,
   statusCode: number = 200
 ) => {
+  if (data.warning) {
+    const warningHeaders = new Headers({ warning: data.warning });
+    res.setHeaders(warningHeaders);
+  }
   res.status(statusCode).json({
     status: statusCode,
     message,

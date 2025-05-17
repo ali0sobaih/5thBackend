@@ -5,9 +5,18 @@ import cors from "cors";
 // import "./server";
 
 // TODO: use index file to import all routers
-import serverStatsRouter from "@routes/server-stats";
+import serverStatsRouter from "@routes/serverDiagnostics";
 import userRoutes from "@routes/authRoutes";
 import authorizationRoutes from "@routes/authorizationRouts";
+import {
+  AuthRouter,
+  ServerDiagnosticsRouter,
+  ChatRouter,
+  AuthorizationRouter,
+  StudiesRouter,
+  locationRouter,
+  GISDataRouter,
+} from "@routes";
 // import chatRoutes from "@routes/chatRoutes";
 
 // TODO: use index file to import middlewares
@@ -20,11 +29,15 @@ app.use(errorHandler);
 
 const VERSION = process.env.API_VERSION;
 
-app.use(`/${VERSION}/test`, serverStatsRouter);
+app.use(`/${VERSION}/test`, ServerDiagnosticsRouter);
 
-app.use(`/${VERSION}/user`, userRoutes);
-app.use(`/${VERSION}/authorization`, authorizationRoutes);
-// app.use(`/${VERSION}/chats`, chatRoutes);
+app.use(`/${VERSION}/user`, AuthRouter);
+app.use(`/${VERSION}/authorization`, AuthorizationRouter);
+app.use(`/${VERSION}/studies`, StudiesRouter);
+app.use(`/${VERSION}/locations`, locationRouter);
+app.use(`/${VERSION}/GISData`, GISDataRouter);
+
+// app.use(`/${VERSION}/chats`, ChatRouter);
 
 const HOST = process.env.SERVER_HOST;
 const PORT = process.env.SERVER_PORT;

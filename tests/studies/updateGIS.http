@@ -1,0 +1,17 @@
+PATCH http://localhost:3000/v1/studies/updateGIS/3
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhbGkxQGdtYWlsLmNvbSIsImlhdCI6MTc0NzQ2OTU1NCwiZXhwIjoxNzQ3NTU1OTU0fQ.u57COuwHOXuhwj4P-JQyUXfSY75VOqhpbMqwKincBjI
+
+[
+  {
+    "category_id": 1,
+    "condition": "abundant",
+    "accessibility": "good",
+    "locationId": 2,
+    "author_id": 1,
+    "quantity": {
+      "number_val": 150
+    }
+  }
+]
