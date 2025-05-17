@@ -11,7 +11,7 @@ import authorizationRoutes from "@routes/authorizationRouts";
 import {
   AuthRouter,
   ServerDiagnosticsRouter,
-  ChatRouter,
+  // ChatRouter,
   AuthorizationRouter,
   StudiesRouter,
   locationRouter,
@@ -21,7 +21,9 @@ import {
 
 // TODO: use index file to import middlewares
 import { errorHandler } from "@middlewares/serverErrorHandler";
+import { getConfigurations } from "@utils";
 
+console.log(getConfigurations());
 export const app = express();
 
 app.use(cors());
