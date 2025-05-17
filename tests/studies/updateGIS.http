@@ -1,7 +1,30 @@
-PATCH http://localhost:3000/v1/studies/updateGIS/3
+// FILE VARIABLES
+
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@userRoute = {{basePath}}/user
+@route = {{basePath}}/studies
+
+// REQUESTS
+
+# @name Login
+POST {{userRoute}}/login
 Content-Type: application/json
 Accept: */*
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhbGkxQGdtYWlsLmNvbSIsImlhdCI6MTc0NzQ2OTU1NCwiZXhwIjoxNzQ3NTU1OTU0fQ.u57COuwHOXuhwj4P-JQyUXfSY75VOqhpbMqwKincBjI
+
+{
+    "authenticator": {
+        "username": "ali"
+    },
+    "password": "pass1!@dSds"
+}
+###
+
+# @name UpdateGIS
+PATCH {{route}}/updateGIS/3
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{{{Login.response.body.token}}}}
 
 [
   {
