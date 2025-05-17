@@ -6,11 +6,9 @@ import {
   GISdataTable,
   GIScategoriesTable,
 } from "../db/schemas/index";
+import { ConflictError } from "@errors/api";
 
-export const addStudyGISData = async (
-  geoData: GISData[],
-  studyId: number
-) => {
+export const addStudyGISData = async (geoData: GISData[], studyId: number) => {
   for (const geoItem of geoData) {
     let quantityId: number | null = null;
 
@@ -36,8 +34,12 @@ export const addStudyGISData = async (
   }
 };
 
-// TODO: this need rapier ,it is not final!
 export const addCategoryService = async (data: addGISCategory) => {
+  const existing = await db.select().from(GIScategoriesTable);
+  if (existing.length === 0) {
+    throw new ConflictError("the category already exists!");
+  }
+
   await db.insert(GIScategoriesTable).values(data);
 
   return {
