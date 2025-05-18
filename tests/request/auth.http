@@ -12,10 +12,10 @@ Content-Type: application/json
 Accept: */*
 
 {
-    "username": "ali9",
+    "username": "ali23",
     "first_name": "ali",
     "last_name": "ali",
-    "email": "ali9@gmail.com",
+    "email": "alisobaih3@gmail.com",
     "phone": "0909090958",
     "password": "pass1!@dSds"
 }
@@ -52,5 +52,17 @@ POST {{route}}/delete-account
 Content-Type: application/json
 Accept: */*
 Authorization: Bearer {{LoginWithUsername.response.body.token}}
+
+###
+
+# @name ForgotPassword
+POST {{route}}/forgot-password
+Content-Type: application/json
+Accept: */*
+
+{
+    "email": "alisobaih3@gmail.com",
+    "username": "ali23"
+}
 
 ###

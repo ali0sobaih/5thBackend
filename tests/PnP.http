@@ -1,0 +1,39 @@
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@route = {{basePath}}/PnP
+
+// REQUESTS
+
+# @name ADDPnP
+POST {{route}}/add-pnp-terms
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJhbGk5QGdtYWlsLmNvbSIsImlhdCI6MTc0NzU2Njg4OCwiZXhwIjoxNzQ3NjUzMjg4fQ.AtFYVA5o4BlGM1VjoKKGotwbvJ1Wa2JAJ7E9S04vb8c
+
+[
+   {
+      "heading": "first",
+      "content": "We respect your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and safeguard your information. By using our services, you agree to these terms. We do not share your data with third parties without consent. For more details, contact us at privacy@example.com"
+   },
+   {
+      "heading": "second",
+      "content": "We respect your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and safeguard your information. By using our services, you agree to these terms. We do not share your data with third parties without consent. For more details, contact us at privacy@example.com"
+   },
+      {
+      "heading": "third",
+      "content": "We respect your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and safeguard your information. By using our services, you agree to these terms. We do not share your data with third parties without consent. For more details, contact us at privacy@example.com"
+   },
+   {
+      "heading": "fourth",
+      "content": "We respect your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and safeguard your information. By using our services, you agree to these terms. We do not share your data with third parties without consent. For more details, contact us at privacy@example.com"
+   }
+
+]
+
+###
+
+# @name SHOWPnP
+POST {{route}}/show-pnp-terms
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJhbGk5QGdtYWlsLmNvbSIsImlhdCI6MTc0NzU2Njg4OCwiZXhwIjoxNzQ3NjUzMjg4fQ.AtFYVA5o4BlGM1VjoKKGotwbvJ1Wa2JAJ7E9S04vb8c

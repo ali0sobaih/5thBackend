@@ -8,8 +8,7 @@ interface AuthenticatedRequest extends Request {
   user?: JwtPayload;
 }
 
-const addCategory = controllerWrapper(
-  async (req: Request, res: Response) => {
+const addCategory = controllerWrapper(async (req: Request, res: Response) => {
   const addCategoryData = (req as any).validated;
   const result = await addCategoryService(addCategoryData);
   return success(res, result.message, result.data, result.code);
@@ -18,3 +17,5 @@ const addCategory = controllerWrapper(
 export default {
   addCategory,
 };
+
+ 

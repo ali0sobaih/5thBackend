@@ -14,3 +14,4 @@ export * from "./investmentProposals";
 export * from "./locations";
 export * from "./studies";
 export * from "./quantities";
+export * from "./privacy&policy";

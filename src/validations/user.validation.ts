@@ -64,5 +64,15 @@ export const loginUserSchema = z.object({
   password: z.string({ required_error: "Password is required" }),
 });
 
+export const forgotPWSchema = z.object({
+  email: z.string({
+    required_error: "the user's email is required!",
+  }),
+  username: z.string({
+    required_error: "the username is required!!",
+  }),
+});
+
+export type forgotPW = z.infer<typeof forgotPWSchema>;
 export type UserRegister = z.infer<typeof registerUserSchema>;
 export type UserLogin = z.infer<typeof loginUserSchema>;

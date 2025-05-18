@@ -16,6 +16,7 @@ import {
   StudiesRouter,
   locationRouter,
   GISDataRouter,
+  PnPRouter,
 } from "@routes";
 // import chatRoutes from "@routes/chatRoutes";
 
@@ -36,6 +37,7 @@ app.use(`/${VERSION}/authorization`, AuthorizationRouter);
 app.use(`/${VERSION}/studies`, StudiesRouter);
 app.use(`/${VERSION}/locations`, locationRouter);
 app.use(`/${VERSION}/GISData`, GISDataRouter);
+app.use(`/${VERSION}/PnP`, PnPRouter);
 
 // app.use(`/${VERSION}/chats`, ChatRouter);
 
