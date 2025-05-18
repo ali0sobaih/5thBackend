@@ -4,14 +4,10 @@ import express, { json } from "express";
 import cors from "cors";
 // import "./server";
 
-// TODO: use index file to import all routers
-import serverStatsRouter from "@routes/serverDiagnostics";
-import userRoutes from "@routes/authRoutes";
-import authorizationRoutes from "@routes/authorizationRouts";
 import {
   AuthRouter,
   ServerDiagnosticsRouter,
-  ChatRouter,
+  // ChatRouter,
   AuthorizationRouter,
   StudiesRouter,
   locationRouter,

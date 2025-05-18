@@ -10,6 +10,7 @@
     "build": "tsc",
     "generate": "npx drizzle-kit generate",
     "migrate": "npx drizzle-kit migrate",
+    "seeds": "ts-node-dev -r tsconfig-paths/register ./src/db/seeders/seedRoles",
     "push": "npx drizzle-kit push",
     "studio": "npx drizzle-kit studio"
   },
