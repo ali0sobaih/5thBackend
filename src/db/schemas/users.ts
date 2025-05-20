@@ -9,5 +9,7 @@ export const usersTable = mysqlTable("users", {
   email: varchar("email", { length: 255 }).notNull().unique(),
   user_name: varchar("user_name", { length: 100 }).notNull(),
   phone: varchar("phone", { length: 20 }).notNull(),
+  google_id: varchar('google_id', { length: 255 }),
+  token_version: int('token_version').default(1).notNull(),
   ...timestamps,
 });
