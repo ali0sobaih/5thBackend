@@ -1,5 +1,7 @@
 import { Response } from "express";
 
+// todo: make the pagination in the metadata the way you want!!
+// ! i did not want to make a change that effects your code
 export const success = (
   res: Response,
   message: string,
