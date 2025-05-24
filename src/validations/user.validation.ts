@@ -64,5 +64,20 @@ export const loginUserSchema = z.object({
   password: z.string({ required_error: "Password is required" }),
 });
 
+export const forgotPWSchema = z.object({
+  email: z.string({
+    required_error: "the user's email is required!",
+  }),
+  username: z.string({
+    required_error: "the username is required!!",
+  }),
+});
+
+export const searchTermSchema = z.object({
+  searchTerm: z.string({required_error: "enter the term you are searching for!"}).min(1).max(20)
+});
+
+export type searchTerm = z.infer<typeof searchTermSchema>;
+export type forgotPW = z.infer<typeof forgotPWSchema>;
 export type UserRegister = z.infer<typeof registerUserSchema>;
 export type UserLogin = z.infer<typeof loginUserSchema>;

@@ -10,4 +10,4 @@
 GET {{route}}/server-up
 Content-Type: application/json
 Accept: */*
-###
+### 

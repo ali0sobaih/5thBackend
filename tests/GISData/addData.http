@@ -14,7 +14,7 @@ Accept: */*
 
 {
     "authenticator": {
-        "username": "ali"
+        "username": "ali23"
     },
     "password": "pass1!@dSds"
 }
@@ -29,5 +29,134 @@ Authorization: Bearer {{Login.response.body.token}}
 {
   "name": "abs",
   "description" : "ali is the GOAT"
+}
+###
+
+
+### 1. Successful CSV Upload
+# @name AddGeoDataFile
+POST {{route}}/gis-file-upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{Login.response.body.token}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="author_id"
+
+12
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="note"
+
+Test CSV upload
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="locations.csv"
+Content-Type: application/geo+json
+
+< ./test-files/file4.json
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+
+### 2. Successful Excel Upload
+# @name AddGeoDataFileExcel
+POST {{route}}/gis-file-upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{Login.response.body.token}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="author_id"
+
+2
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="locations.xlsx"
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+< ./test-files/file3.xlsx
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+// TODO: did not try this yet
+### 3. Successful GeoJSON Upload
+# @name AddGeoDataFileGeoJSON
+POST {{route}}/gis-file-upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{Login.response.body.token}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="author_id"
+
+3
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="note"
+
+GeoJSON test with note
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="locations.geojson"
+Content-Type: application/geo+json
+
+< ./test-files/file4.geojson
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+### 4. Missing File (Negative Test)
+POST {{route}}/gis-file-upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{Login.response.body.token}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="author_id"
+
+4
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+### 5. Invalid File Type (Negative Test)
+POST {{route}}/gis-file-upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{Login.response.body.token}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="author_id"
+
+5
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="invalid.pdf"
+Content-Type: application/pdf
+
+< ./test-files/aaa.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+// TODO:did not do this yet
+### 6. Large File (Negative Test)
+POST {{route}}/gis-file-upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer {{Login.response.body.token}}
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="author_id"
+
+6
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="huge.csv"
+Content-Type: text/csv
+
+< ./test-files/large_file.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+###
+
+### 1. upload by UI not FILE
+# @name UPLOAD-BY-UI
+POST {{route}}/gis-data-upload
+Content-Type: application/json
+Accept: */*
+
+{
+  "category_id": 2,
+  "condition": "abundant",
+  "accessibility": "mediocre",
+  "string_val": 1,
+  "location_id": 2,
+  "author_id": 2,
+  "note": "ali is here"
 }
 ###

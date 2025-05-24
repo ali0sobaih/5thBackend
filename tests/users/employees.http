@@ -1,0 +1,38 @@
+// FILE VARIABLES
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@userRoute = {{basePath}}/user
+@route = {{basePath}}/users
+
+# @name Login
+POST {{userRoute}}/login
+Content-Type: application/json
+Accept: */*
+
+{
+    "authenticator": {
+        "username": "ali5"
+    },
+    "password": "pass1!@dSds"
+}
+###
+
+# @name GET-ALL-EMPLOYEES
+GET {{route}}/get-employees
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+ 
+###
+
+# @name SEARCH-EMPLOYEES
+GET {{route}}/search-employees
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+ 
+{
+    "searchTerm" : "John"
+}
+
+###

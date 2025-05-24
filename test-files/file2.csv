@@ -1,0 +1,4 @@
+category_id,condition,accessibility,location_id,string_val,number_val
+1,abundant,good,2,"ali"
+2,abundant,bad,2,,25
+3,abundant,good,2,,4

@@ -1,0 +1,4 @@
+category_id,condition,accessibility,locationId,string_val,number_val
+1,good,public,101,"available",
+2,fair,private,102,,25.5
+3,excellent,public,103,"limited",10

@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
 import { ZodSchema } from "zod";
+import { AnyZodObject } from "zod";
+import { error } from "../utils/response"; // or however you handle errors
 
 export const validate = (schema: ZodSchema): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction): void => {
@@ -16,3 +18,26 @@ export const validate = (schema: ZodSchema): RequestHandler => {
     }
   };
 };
+
+export const validateFile =
+  (schema: AnyZodObject) =>
+  (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // ✅ Use the combined object from previous middleware
+      const dataToValidate = (req as any).validated;
+
+      if (!dataToValidate) {
+        return error(res, "Validation failed", [
+          { path: ["request"], message: "Missing combined data" },
+        ]);
+      }
+
+      const parsed = schema.parse(dataToValidate);
+      (req as any).validated = parsed;
+
+      next();
+    } catch (err: any) {
+      return error(res, "Validation failed", err.errors || err);
+    }
+  };
+

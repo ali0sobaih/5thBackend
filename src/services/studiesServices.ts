@@ -13,7 +13,7 @@ import { NotFoundError } from "@errors/api";
 
 export const addStudyService = async (studyData: addStudy) => {
   const isDraft = true;
-  let locationId = studyData.location_id;
+  let location_id = studyData.location_id;
 
   // Create study draft record
   const [studyResult] = await db.insert(studiesTable).values({
@@ -21,7 +21,7 @@ export const addStudyService = async (studyData: addStudy) => {
     study: studyData.study,
     author_id: studyData.author_id,
     status: "byEmployees",
-    location_id: locationId,
+    location_id: location_id,
     draft: isDraft,
   });
 
