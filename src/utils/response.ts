@@ -14,7 +14,7 @@ export const success = (
   }
   res.status(statusCode).json({
     ...data,
-    metaData: {
+    metadata: {
       status: statusCode,
       message,
     },

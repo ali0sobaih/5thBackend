@@ -162,6 +162,8 @@ export const getGeoTableService = async (page: number, pageSize: number) => {
         pageSize,
         totalItems: count,
         totalPages: Math.ceil(count / pageSize),
+        // TODO: check if you need the below values in your code base.
+        //! front-end devs can compute these values
         hasNextPage: page * pageSize < count,
         hasPreviousPage: page > 1,
       },
@@ -200,13 +202,10 @@ export const getGeoMapService = async () => {
       eq(GISdataTable.category_id, GIScategoriesTable.id)
     )
     .where(isNull(GISdataTable.study_id));
-  
-    return {
-      message:
-        data.length > 0 ? "Geo data found" : "No data at the moment",
-      data: data,
-      code: 200
-    }   
+
+  return {
+    message: data.length > 0 ? "Geo data found" : "No data at the moment",
+    data: data,
+    code: 200,
+  };
 };
-
-
