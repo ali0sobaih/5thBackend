@@ -1,4 +1,4 @@
-import { mysqlTable, int, varchar, mysqlEnum } from "drizzle-orm/mysql-core";
+import { mysqlTable, int, text, mysqlEnum } from "drizzle-orm/mysql-core";
 import { GIScategoriesTable } from "./GIScategories";
 import { quantitiesTable } from "./quantities";
 import { locationsTable } from "./locations";
@@ -19,6 +19,7 @@ export const GISdataTable = mysqlTable("GISdata", {
   accessibility: mysqlEnum("accessibility", ["good", "mediocre", "bad"]),
   study_id: int("study_id").references(() => studiesTable.id),
   quantity_id: int("quantity_id").references(() => quantitiesTable.id),
+  note: text("note"),
   ...timestamps,
 });
 

@@ -1,0 +1,46 @@
+// FILE VARIABLES
+
+@baseURL = {{protocol}}://{{host}}:{{port}}
+@basePath = {{baseURL}}/{{version}}
+@userRoute = {{basePath}}/user
+@route = {{basePath}}/GISData
+
+
+// REQUESTS
+
+# @name Login
+POST {{userRoute}}/login
+Content-Type: application/json
+Accept: */*
+
+{
+    "authenticator": {
+        "username": "ali23"
+    },
+    "password": "pass1!@dSds"
+}
+###
+
+#1 get data in table
+# @name GET-GEO-DATA-TABLE
+GET {{route}}/get-geo-table/3/3
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+
+{
+
+}
+###
+
+
+#2 get data in map
+# @name GET-GEO-DATA-MAP
+GET {{route}}/get-geo-map
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+
+{
+
+}

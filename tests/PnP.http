@@ -1,14 +1,29 @@
 @baseURL = {{protocol}}://{{host}}:{{port}}
 @basePath = {{baseURL}}/{{version}}
+@userRoute = {{basePath}}/user
 @route = {{basePath}}/PnP
 
 // REQUESTS
+
+
+# @name Login
+POST {{userRoute}}/login
+Content-Type: application/json
+Accept: */*
+
+{
+    "authenticator": {
+        "username": "ali5"
+    },
+    "password": "pass1!@dSds"
+}
+###
 
 # @name ADDPnP
 POST {{route}}/add-pnp-terms
 Content-Type: application/json
 Accept: */*
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJhbGk5QGdtYWlsLmNvbSIsImlhdCI6MTc0NzU2Njg4OCwiZXhwIjoxNzQ3NjUzMjg4fQ.AtFYVA5o4BlGM1VjoKKGotwbvJ1Wa2JAJ7E9S04vb8c
+Authorization: Bearer {{Login.response.body.token}}
 
 [
    {
@@ -36,4 +51,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiO
 POST {{route}}/show-pnp-terms
 Content-Type: application/json
 Accept: */*
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJhbGk5QGdtYWlsLmNvbSIsImlhdCI6MTc0NzU2Njg4OCwiZXhwIjoxNzQ3NjUzMjg4fQ.AtFYVA5o4BlGM1VjoKKGotwbvJ1Wa2JAJ7E9S04vb8c
+Authorization: Bearer {{Login.response.body.token}}

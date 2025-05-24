@@ -13,6 +13,7 @@ import {
   locationRouter,
   GISDataRouter,
   PnPRouter,
+  usersRouter,
 } from "@routes";
 // import chatRoutes from "@routes/chatRoutes";
 
@@ -22,7 +23,15 @@ import { errorHandler } from "@middlewares/serverErrorHandler";
 export const app = express();
 
 app.use(cors());
-app.use(json());
+app.use((req, res, next) => {
+  if (req.is("multipart/form-data")) return next();
+  express.json()(req, res, next);
+});
+
+app.use((req, res, next) => {
+  if (req.is("multipart/form-data")) return next();
+  express.urlencoded({ extended: true })(req, res, next);
+});
 
 const VERSION = process.env.API_VERSION;
 
@@ -34,6 +43,7 @@ app.use(`/${VERSION}/studies`, StudiesRouter);
 app.use(`/${VERSION}/locations`, locationRouter);
 app.use(`/${VERSION}/GISData`, GISDataRouter);
 app.use(`/${VERSION}/PnP`, PnPRouter);
+app.use(`/${VERSION}/users`, usersRouter);
 
 // app.use(`/${VERSION}/chats`, ChatRouter);
 

@@ -12,10 +12,10 @@ Content-Type: application/json
 Accept: */*
 
 {
-    "username": "ali23",
+    "username": "ali7",
     "first_name": "ali",
     "last_name": "ali",
-    "email": "alisobaih3@gmail.com",
+    "email": "alisobaih7@gmail.com",
     "phone": "0909090958",
     "password": "pass1!@dSds"
 }
