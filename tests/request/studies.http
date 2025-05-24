@@ -20,6 +20,28 @@ Accept: */*
 }
 ###
 
+# @name AddStudyDraft
+POST {{route}}/addToDraft
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+
+{
+  "title": "Area Study",
+  "study": "Testing area polygons...",
+  "author_id": 1,
+  "status": "ai_pending",
+  "location_id": 1
+}
+###
+
+# @name SaveStudyWithWarning
+PATCH  {{route}}/saveStudy/3
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+###
+
 # @name UpdateGIS
 PATCH {{route}}/updateGIS/3
 Content-Type: application/json
@@ -38,4 +60,16 @@ Authorization: Bearer {{{{Login.response.body.token}}}}
     }
   }
 ]
+###
+
+# @name UpdateStudyLocation
+PATCH  {{route}}/updateLocation
+Content-Type: application/json
+Accept: */*
+Authorization: Bearer {{Login.response.body.token}}
+
+{
+    "location_id" : 2,
+    "study_id" : 2
+}
 ###
