@@ -39,7 +39,7 @@ router.post(
   GISDataController.addCategory
 );
 
-// TODO: use path queries instead of path params. (after all pagination is related to filtering)
+// TODO: use path queries instead of path params. (after all pagination is related to filtering) test.com/path?query=6&another=10
 router.get("/get-geo-table/:page/:pageSize", GISDataController.getGeoTable);
 
 router.get("/get-geo-map", GISDataController.getGeoMap);

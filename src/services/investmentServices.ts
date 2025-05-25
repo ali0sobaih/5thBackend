@@ -3,9 +3,9 @@ import { db } from "../db/connection";
 // TODO: read this
 
 //? investor
-export const makeProposeService = async () => {};
-//! adding investment propose
-//* Yes just add the investment
+export const makeProposeService = async () => {
+    
+};
 
 //? investor
 export const trackProposeService = async () => {};
@@ -22,7 +22,7 @@ export const trackProposeService = async () => {};
 export const getAllProposesService = async () => {};
 //! show all investment proposes to handel them + another API for filtering the investments by the locations or the type
 //* 1. One api should be fine. just utilize path queries for filtering
-//* 2. Remember to separate investor result from employee results
+//* 2. Remember to separate investor result from employee results 
 
 //? employee
 export const getProposeInfoService = async () => {};
@@ -30,27 +30,20 @@ export const getProposeInfoService = async () => {};
 //* The propose consists of location, type (who is suggestion) and a name could also include a description
 
 //? employee
-export const approveProposeService = async () => {};
+export const approveProposeService = async () => {}; 
 
 //? employee
-export const refuseProposeService = async () => {};
-
-//? employee
-//! Make sure to use a better naming convention. (for future references of this file)
-export const addSugsService = async () => {};
-//! suggest for the investor
-//* Yes, after the employee reads the request, he can refuse and give a suggestion for
-//* a better use of his money/investment/land
+export const refuseProposeService = async () => {}; 
 
 //? investor + employee
 //! Make sure to use a better naming convention. (for future references of this file)
-export const showSugsMapService = async () => {};
+export const showSuggestionsMapService = async () => {};
 //! the ones suggested by employees ON MAP
 //* That's correct
 
 //? investor + employee
 //! Make sure to use a better naming convention. (for future references of this file)
-export const showSugsListService = async () => {};
+export const showSuggestionsListService = async () => {};
 //! the ones suggested by employees ON LIST
 //* Same as before, although you don't need to separate apis/services
 //* let the front-end devs handle the display options

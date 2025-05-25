@@ -175,7 +175,7 @@ export const getGeoTableService = async (page: number, pageSize: number) => {
 // TODO: make a fetching data based on importance for maps
 // ? first load the locations with the names
 // ? then some details will be shown on a click with an API (the author data and the quantity id)
-// ! the author will be shown on the dashboard but not the user's interface so may be different APIs (maybe the importance of the other data will differ also)
+// ! the auth shown on the dashboard but not the user's interface so may be different APIs (maybe the importance of the other data will differ also)
 
 export const getGeoMapService = async () => {
   const data = await db
