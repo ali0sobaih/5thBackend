@@ -1,75 +1,54 @@
+// src/middlewares/passport.ts
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { db } from '@db/connection';
 import { usersTable } from '@db/schemas/users';
 import { eq } from 'drizzle-orm';
-import { generateToken } from '@utils/generateToken';
+import { findOrCreateGoogleUser } from '@services/authServices';
+import type { Request } from 'express';
+
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID!,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    callbackURL: '/api/v1/auth/google/callback',
+    callbackURL: `${process.env.API_URL}/auth/google/callback`, // استخدام متغير بيئي
     scope: ['profile', 'email'],
-    state: true
+    state: true, // حماية من CSRF
 }, async (accessToken, refreshToken, profile, done) => {
     try {
-        const email = profile.emails?.[0].value;
-        if (!email) return done(new Error("No email found"), undefined);
-
-        // البحث بالمستخدم عن طريق Google ID أو Email
-        const [existingUser] = await db
-            .select()
-            .from(usersTable)
-            .where(eq(usersTable.google_id, profile.id));
-
-        if (existingUser) return done(null, existingUser);
-
-        const [userByEmail] = await db
-            .select()
-            .from(usersTable)
-            .where(eq(usersTable.email, email));
-
-        if (userByEmail) {
-            // تحديث المستخدم بإضافة Google ID
-            await db
-                .update(usersTable)
-                .set({ google_id: profile.id })
-                .where(eq(usersTable.id, userByEmail.id));
-            return done(null, userByEmail);
+        if (!profile.emails?.[0]?.value) {
+            return done(new Error("Google account email is required"), null);
         }
-
-        // إنشاء مستخدم جديد
-        const newUser = {
-            first_name: profile.name?.givenName || 'Google',
-            last_name: profile.name?.familyName || 'User',
-            email: email,
-            google_id: profile.id,
-            password: '', // لا حاجة لكلمة المرور
-            token_version: 1
-        };
-
-        const result = await db.insert(usersTable).values(newUser);
-        const [createdUser] = await db
-            .select()
-            .from(usersTable)
-            .where(eq(usersTable.id, result[0].insertId));
-
-        done(null, createdUser);
+        const { user, token } = await findOrCreateGoogleUser(profile);
+        return done(null, { ...user, token }, { token });
     } catch (error) {
-        done(error as Error);
+        console.error('Google OAuth Error:', error);
+        return done(new Error('Failed to authenticate with Google'), null);
     }
 }));
 
-// Serialization
 passport.serializeUser((user: any, done) => {
-    done(null, user.id);
+    done(null, {
+        id: user.id,
+        token: user.token 
+    });
 });
 
-// Deserialization
-passport.deserializeUser(async (id: number, done) => {
-    const [user] = await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.id, id));
-    done(null, user);
+passport.deserializeUser(async (serialized: { id: number; token: string }, done) => {
+    try {
+        const [user] = await db
+            .select()
+            .from(usersTable)
+            .where(eq(usersTable.id, serialized.id));
+
+        if (!user) return done(new Error("User not found"), null);
+        done(null, {
+            id: user.id,
+            email: user.email,
+            authStrategy: user.google_id ? 'google' : 'local',
+            token: serialized.token
+        });
+    } catch (error) {
+        done(error, null);
+    }
 });
